@@ -1,5 +1,5 @@
 import { useContext, useRef } from "react";
-import { FruitContext } from "../../context/FruitContext";
+import { FruitContext } from "../../../context/FruitContext";
 
 export function SearchBar() {
     const inputRef = useRef<HTMLInputElement>(null);

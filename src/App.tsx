@@ -1,12 +1,14 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import DemoMode from './components/DemoMode'
 import useCounter from './hooks/useCounter'
 import useLogger from './effects/useLogger'
-import Fruits from './components/Fruits/Fruits'
+import Fruits from './ui/components/Fruits/Fruits'
 import { FruitProvider } from './context/FruitContext'
-import { SearchBar } from './components/SearchBar/SearchBar'
+import { SearchBar } from './ui/components/SearchBar/SearchBar'
+import { Link, Route, Routes } from 'react-router-dom'
+import Home from './ui/pages/Home'
+import FruitsPage from './ui/pages/FruitsPage'
 
 function App() {
   const { count, increment } = useCounter(0);
@@ -14,6 +16,17 @@ function App() {
 
   return (
     <>
+    <nav style={{ display: 'flex', gap: '1rem' }}>
+        <Link to="/">Home</Link>
+        <Link to="/fruits">Fruits</Link>
+      </nav>
+
+          <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/fruits" element={<FruitsPage />} />
+      </Routes>
+
+
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -23,8 +36,6 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-
-      <DemoMode />
 
       <FruitProvider>
         <SearchBar />

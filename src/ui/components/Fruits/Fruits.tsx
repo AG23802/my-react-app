@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FruitContext } from "../../context/FruitContext";
+import { FruitContext } from "../../../context/FruitContext";
 import "./Fruits.css";
 
 export default function Fruits() {
