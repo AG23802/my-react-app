@@ -4,6 +4,9 @@ import './App.css'
 import DemoMode from './components/DemoMode'
 import useCounter from './hooks/useCounter'
 import useLogger from './effects/useLogger'
+import Fruits from './components/Fruits/Fruits'
+import { FruitProvider } from './context/FruitContext'
+import { SearchBar } from './components/SearchBar/SearchBar'
 
 function App() {
   const { count, increment } = useCounter(0);
@@ -21,7 +24,12 @@ function App() {
       </div>
       <h1>Vite + React</h1>
 
-      <DemoMode></DemoMode>
+      <DemoMode />
+
+      <FruitProvider>
+        <SearchBar />
+        <Fruits />
+      </FruitProvider>
 
       <div className="card">
         <button onClick={increment}>
