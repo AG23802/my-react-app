@@ -1,11 +1,13 @@
-import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import DemoMode from './components/DemoMode'
+import useCounter from './hooks/useCounter'
+import useLogger from './effects/useLogger'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { count, increment } = useCounter(0);
+  useLogger(count)
 
   return (
     <>
@@ -22,7 +24,7 @@ function App() {
       <DemoMode></DemoMode>
 
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={increment}>
           count is {count}
         </button>
         <p>
