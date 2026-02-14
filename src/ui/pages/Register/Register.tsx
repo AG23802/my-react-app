@@ -20,7 +20,8 @@ export function Register() {
     const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
         try {
             await new Promise(resolve => setTimeout(resolve, 2000)) // Simulate a network request
-            throw new Error("Simulated server error") // Simulate a server error
+            alert("Registration successful!")
+            // throw new Error("Simulated server error") // Simulate a server error
             console.log(data)
         } catch (error) {
             setError("root", { message: "500 Error" })
@@ -48,7 +49,7 @@ export function Register() {
                 </div>
 
                 <div>
-                    <input {...register('email')} type="email" placeholder="Email Address" />
+                    <input {...register('email')} placeholder="Email Address" />
                     {errors.email && <div className="error">{errors.email.message}</div>}
                 </div>
 

@@ -12,7 +12,9 @@ export function Sidebar() {
     return (
         <aside
         >
-            <button onClick={() => toggleSidebar()}>Close</button>
+            <button onClick={() => {
+                // toggleSidebar()
+            }}>Close</button>
             <nav>
                 <Link to="/register">Register</Link>
                 <Link to="/">Home</Link>
