@@ -1,0 +1,14 @@
+nav {
+    display: flex;
+    flex-direction: column;
+}
+
+aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240;
+    height: 100vh;
+    padding: 16;
+    background: #1a1a1a;
+}

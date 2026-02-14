@@ -1,37 +1,38 @@
 
-import { createContext, useMemo, useState, type ReactNode } from "react";
-import fruits from "../assets/fruits";
+import { createContext, useMemo, type Dispatch, type ReactNode } from "react"
+import { initialCartState } from "../reducers/cartReducer"
+import useCart from "../hooks/useCart"
+import useSearchFilters from "../hooks/useSearchFilters"
+import type { Fruit } from "../types/fruit"
 
 interface FruitContextType {
-    fruits: typeof fruits
-    sweetOnly: boolean;
-    toggleSweetOnly: () => void;
-    setQuery: (query: string) => void;
+    fruits: Fruit[]
+    sweetOnly: boolean
+    toggleSweetOnly: () => void
+    setQuery: (query: string) => void
+    state?: typeof initialCartState
+    dispatch: Dispatch<any>
 }
 
 export const FruitContext = createContext<FruitContextType | undefined>(undefined)
 
 export function FruitProvider({ children }: { children?: ReactNode }) {
-    const [sweetOnly, setSweetOnly] = useState(false);
-    const [query, setQuery] = useState("");
-    const toggleSweetOnly = () => setSweetOnly((prev) => !prev);
+    const { setQuery, sweetOnly, setSweetOnly, filteredFruits } = useSearchFilters()
+    const toggleSweetOnly = () => setSweetOnly((prev) => !prev)
+    const { state, dispatch } = useCart()
 
-    // ✅ This calculates the list whenever query or sweetOnly changes
-    const filteredFruits = useMemo(() => {
-        return fruits.filter(fruit => {
-            const matchesSearch = fruit.name.toLowerCase().includes(query.toLowerCase());
-            const matchesSweet = sweetOnly ? fruit.isSweet : true;
-            return matchesSearch && matchesSweet;
-        });
-    }, [query, sweetOnly]);
+    console.log("FruitProvider - filteredFruits:", filteredFruits);
 
     // Inside your FruitProvider
     const value = useMemo(() => ({
         fruits: filteredFruits,
         sweetOnly,
         toggleSweetOnly,
-        setQuery
-    }), [filteredFruits, sweetOnly]); // toggleSweetOnly and setQuery are stable (don't change)
+        setQuery,
+        state,
+        dispatch
+    }), [filteredFruits, sweetOnly, state]) // toggleSweetOnly and setQuery are stable (don't change)
+
 
     return (
         <FruitContext.Provider value={value}>
