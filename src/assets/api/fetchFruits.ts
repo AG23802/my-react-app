@@ -1,5 +1,5 @@
 export async function fetchFruits() {
-  const res = await fetch('http://localhost:5000/api/external-data');
+  const res = await fetch('http://localhost:8080/api/v1/fruits/all');
 
   if (!res.ok) {
     throw new Error('Failed to fetch fruits');

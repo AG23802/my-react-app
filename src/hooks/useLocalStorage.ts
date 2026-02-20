@@ -1,11 +1,11 @@
 import { useState } from "react"
 
-export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
+export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void, () => void] {
     const [storedValue, setStoredValue] = useState<T>(() => {
         if (typeof window === 'undefined') {    
             return initialValue
-
         }
+
         try {
             const item = window.localStorage.getItem(key)
             return item ? JSON.parse(item) : initialValue
@@ -27,5 +27,14 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T)
         }       
     }
 
-    return [storedValue, setValue]
+    const removeValue = () => {
+    try {
+      localStorage.removeItem(key);
+      setValue(null);
+    } catch (error) {
+      console.warn('Error removing localStorage key:', key, error);
+    }
+  };
+
+    return [storedValue, setValue, removeValue]
 }

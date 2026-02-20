@@ -6,7 +6,7 @@ export default function useCheckout() {
     return useMutation({
         // 1. The actual function that talks to the server
         mutationFn: async (newCart: any) => {
-            const response = await fetch('http://localhost:5000/api/cart', {
+            const response = await fetch('http://localhost:5001/api/cart', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newCart),
@@ -16,7 +16,7 @@ export default function useCheckout() {
         // 2. What to do when the server says "OK"
         onSuccess: () => {
             console.log("Data saved!");
-            // This tells React Query to re-fetch the fruits/cart list 
+            // This tells React Query to re-fetch the fruits/cart list in case stock levels changed after checkout,
             // so the UI stays in sync with the server
             queryClient.invalidateQueries({ queryKey: ['fruits'] });
         },

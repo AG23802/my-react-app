@@ -32,9 +32,8 @@ export function Register() {
 
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form className="m-4" onSubmit={handleSubmit(onSubmit)}>
                 <h1>Register</h1>
-                <p>This is the register page.</p>
 
                 {errors.root && <div className="error">{errors.root.message}</div>}
 

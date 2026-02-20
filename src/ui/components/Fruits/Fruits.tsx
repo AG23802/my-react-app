@@ -4,7 +4,7 @@ import "./Fruits.css"
 import { Link } from "react-router-dom"
 
 export default function Fruits() {
-    const { fruits, sweetOnly, toggleSweetOnly } = useContext(FruitContext)!
+    const { fruits, sweetOnly } = useContext(FruitContext)!
     return <>
 
         <span>Fruits Component</span>
@@ -23,6 +23,5 @@ export default function Fruits() {
 
             
         </div>
-        <button onClick={() => toggleSweetOnly()}>Toggle sweet only</button>
     </>
 }
