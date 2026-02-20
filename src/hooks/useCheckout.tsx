@@ -6,7 +6,8 @@ export default function useCheckout() {
     return useMutation({
         // 1. The actual function that talks to the server
         mutationFn: async (newCart: any) => {
-            const response = await fetch('http://localhost:5001/api/cart', {
+            const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+            const response = await fetch(`${BASE_URL}/fruits/cart`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newCart),

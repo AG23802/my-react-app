@@ -56,10 +56,12 @@ function UserProvider({ children }: UserProviderProps) {
 
   const [state, dispatch] = useReducer(userReducer, { user: storedUser, loading: false, error: null });
 
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const login = async (username: string, password: string) => {
     dispatch({ type: "loginStart" });
     try {
-      const res = await fetch('http://localhost:8080/api/v1/auth/login', {
+      const res = await fetch(`${BASE_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

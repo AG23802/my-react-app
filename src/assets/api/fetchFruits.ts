@@ -1,5 +1,6 @@
 export async function fetchFruits() {
-  const res = await fetch('http://localhost:8080/api/v1/fruits/all');
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const res = await fetch(`${BASE_URL}/fruits/all`);
 
   if (!res.ok) {
     throw new Error('Failed to fetch fruits');
