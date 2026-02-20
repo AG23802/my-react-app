@@ -1,7 +1,8 @@
 import { useState } from "react"
 
-export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void, () => void] {
-    const [storedValue, setStoredValue] = useState<T>(() => {
+export function useLocalStorage<T>(key: string, initialValue: T): [T | null, (value: T | null) => void, () => void] {
+    // 1. Tell useState it can hold T OR null
+    const [storedValue, setStoredValue] = useState<T | null>(() => {
         if (typeof window === 'undefined') {    
             return initialValue
         }
@@ -15,12 +16,21 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T)
         }
     })
 
-    const setValue = (value: T) => {    
+    const setValue = (value: T | null) => {    
         try {
-            const valueToStore = value instanceof Function ? value(storedValue) : value    
+            // 2. Handle the "Function" case carefully with types
+            const valueToStore = value instanceof Function 
+                ? (value as (prev: T | null) => T | null)(storedValue) 
+                : value    
+            
             setStoredValue(valueToStore)
+            
             if (typeof window !== 'undefined') {
-                window.localStorage.setItem(key, JSON.stringify(valueToStore))
+                if (valueToStore === null) {
+                    window.localStorage.removeItem(key)
+                } else {
+                    window.localStorage.setItem(key, JSON.stringify(valueToStore))
+                }
             }
         } catch (error) {
             console.warn(`Error setting localStorage key "${key}":`, error)
@@ -28,13 +38,13 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T)
     }
 
     const removeValue = () => {
-    try {
-      localStorage.removeItem(key);
-      setValue(null);
-    } catch (error) {
-      console.warn('Error removing localStorage key:', key, error);
-    }
-  };
+        try {
+            // 3. This will now work because setValue accepts T | null
+            setValue(null);
+        } catch (error) {
+            console.warn('Error removing localStorage key:', key, error);
+        }
+    };
 
     return [storedValue, setValue, removeValue]
 }

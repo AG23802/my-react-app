@@ -1,7 +1,6 @@
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { registerSchema } from "./schema"
 import { zodResolver } from "@hookform/resolvers/zod/src/index.js"
-import { ca } from "zod/locales"
 
 type FormData = {
     firstName: string
@@ -12,7 +11,7 @@ type FormData = {
 }
 
 export function Register() {
-    const { register, handleSubmit, setError, watch, formState: { errors, isSubmitting } } = useForm<FormData>(
+    const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<FormData>(
         {
             resolver: zodResolver(registerSchema)
         }

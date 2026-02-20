@@ -4,8 +4,7 @@ import { FruitContext } from "../../../context/FruitContext";
 export function SearchBar() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { setQuery } = useContext(FruitContext)!;
-  const handleClick = () => inputRef.current?.focus();
-  const { fruits, sweetOnly, toggleSweetOnly } = useContext(FruitContext)!;
+  const { toggleSweetOnly } = useContext(FruitContext)!;
 
   return (
     <div className="card">

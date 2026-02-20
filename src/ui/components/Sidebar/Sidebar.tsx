@@ -2,11 +2,9 @@
 import { Link } from "react-router-dom";
 import { useAppStore } from "../../../store/useAppStore";
 import "./Sidebar.css";
-import { FaWindowClose } from "react-icons/fa";
 
 export function Sidebar() {
   const isSidebarOpen = useAppStore((state) => state.isSidebarOpen);
-  const toggleSidebar = useAppStore((state) => state.toggleSidebar);
 
   if (!isSidebarOpen) return null;
 

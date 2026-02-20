@@ -6,7 +6,7 @@ export default function Logout() {
 
   return (
     <div>
-      <button onClick={(e) => logout()}>Log Out</button>
+      <button onClick={() => logout()}>Log Out</button>
     </div>
   );
 }

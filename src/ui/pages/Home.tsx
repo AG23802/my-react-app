@@ -1,10 +1,8 @@
-import reactLogo from './../../assets/react.svg'
-import viteLogo from '/vite.svg'
-import { useAppStore } from "../../store/useAppStore"
+// import reactLogo from './../../assets/react.svg'
+// import viteLogo from '/vite.svg'
 import Logout from '../components/Logout'
 
 export default function Home() {
-  const user = useAppStore(state => state.user)
   
   return <>
     <h2>Fruits App</h2>

@@ -8,13 +8,13 @@ interface UserProviderProps {
 }
 
 interface State {
-  user: User;
+  user: User | null;
   loading: boolean;
   error: string | null;
 }
 
 interface UserContextType {
-  user: User;
+  user: User | null;
   loading: boolean;
   error: string | null;
   dispatch: React.Dispatch<any>;
