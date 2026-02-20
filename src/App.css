@@ -39,3 +39,40 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Base styles for all status boxes */
+.status-container {
+    border-radius: 8px;
+    padding: 8px;
+    margin: 1.5rem 0;
+    border: 1px solid;
+    font-weight: 500;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.3s ease-out; /* Subtle entrance animation */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+}
+
+/* Success: Soft Green Theme */
+.success-container {
+    background-color: #00e477;
+    /* color: #065f46; */
+    border-color: #86dbb4;
+    
+}
+
+/* Error: Soft Red Theme */
+.error-container {
+    background-color: #fef2f2; /* Very pale red */
+    color: #991b1b;            /* Dark brick red text */
+    border-color: #fecaca;     /* Soft red border */
+}
+
+/* Simple entrance animation */
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

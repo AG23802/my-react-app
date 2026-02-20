@@ -21,8 +21,6 @@ export function FruitProvider({ children }: { children?: ReactNode }) {
     const toggleSweetOnly = () => setSweetOnly((prev) => !prev)
     const { state, dispatch } = useCart()
 
-    console.log("FruitProvider - filteredFruits:", filteredFruits);
-
     // Inside your FruitProvider
     const value = useMemo(() => ({
         fruits: filteredFruits,

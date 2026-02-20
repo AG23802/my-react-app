@@ -12,6 +12,7 @@ export type CartAction =
     | { type: 'INCREMENT'; payload: CartItem }
     | { type: 'DECREMENT'; payload: { id: string } }
     | { type: 'REMOVE'; payload: { id: string } }
+    | { type: 'CHECKOUT'; payload: CartState }
     | { type: 'CLEAR_CART' }
 
 export const initialCartState: CartState = {
@@ -56,6 +57,11 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
         case 'REMOVE':
             return {
                 items: state.items.filter(item => item.id !== action.payload.id)
+            }
+
+        case 'CHECKOUT':
+            return {
+                items: []
             }
 
         default:

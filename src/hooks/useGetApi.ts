@@ -8,8 +8,6 @@ export default function useGetApi() {
         queryFn: fetchFruits
     });
 
-    console.log("useGetApi - data:", data, "error:", error, "isLoading:", isLoading);
-
     return { data, error, isLoading }
 }
 

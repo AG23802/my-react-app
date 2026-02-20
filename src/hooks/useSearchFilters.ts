@@ -6,8 +6,6 @@ export default function useSearchFilters() {
     const [query, setQuery] = useState("")
     const { data } = useGetApi()
 
-    console.log("useSearchFilters - data:", data);
-
     const toggleSweetOnly = () => setSweetOnly((prev) => !prev)
 
     // ✅ This calculates the list whenever query or sweetOnly changes

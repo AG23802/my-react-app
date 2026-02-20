@@ -6,10 +6,27 @@ import './Cart.css';
 export default function Cart() {
     const { state, dispatch } = useContext(FruitContext)!
     const { fruits } = useContext(FruitContext)!
-    const { mutate, isPending } = useCheckout();
+    const { mutate, isPending, isSuccess, isError, reset } = useCheckout();
 
-    console.log("Cart state:", state);
-    console.log("Fruits data:", fruits);
+    if (isError) {
+        return (
+            <div className="status-container error-container">
+                <h2>Checkout failed. Please try again.</h2>
+                <button onClick={() => reset()}>Close</button>
+            </div>
+        );
+    }
+
+    if (isSuccess) {
+        return (
+            <div className="status-container success-container">
+                <h2>Thank you for your order! 🍎</h2>
+                <div>
+                    <button onClick={() => reset()}>Close</button>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div>
