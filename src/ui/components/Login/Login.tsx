@@ -1,8 +1,8 @@
-import { useContext, useEffect, useRef, useState, type FormEvent } from "react";
-import { UserContext } from "../../../context/UserContext";
+import { useState, type FormEvent } from "react";
 import { ImSpinner } from "react-icons/im";
 import "./Login.css";
 import { Link } from "react-router-dom";
+import useUser from "../../../hooks/useUser";
 
 // admin
 // 123456
@@ -10,21 +10,12 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { login, loading, error } = useContext(UserContext);
-
-  const usernameRef = useRef<HTMLInputElement>(null);
+  const { login, loading, logout, error } = useUser();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // console.log(sum)
-    login(username, password);
+    login({ username, password });
   };
-
-  useEffect(() => {
-    if (usernameRef.current) {
-      usernameRef.current.focus();
-    }
-  }, []);
 
   return (
     <div>
@@ -32,7 +23,6 @@ export default function Login() {
         <h1>Login</h1>
         <input
           className="block"
-          ref={usernameRef}
           placeholder="Username"
           // autoFocus
           value={username}
@@ -50,9 +40,9 @@ export default function Login() {
 
         <div className="flex justify-center">
           {loading ? (
-            <ImSpinner className="animate-spin text-blue-500 w-6 h-6" />
+            <ImSpinner className="animate-spin text-teal-400 w-6 h-6" />
           ) : (
-            <button className="mt-8">Log In</button>
+            <button disabled={loading} className="mt-8">Log In</button>
           )}
           {error && (
             <div

@@ -1,10 +1,10 @@
 import { useMemo, useState } from "react"
-import useGetApi from "./useGetApi"
+import useFetchFruits from "./useFetchFruits"
 
 export default function useSearchFilters() {
     const [sweetOnly, setSweetOnly] = useState(false)
     const [query, setQuery] = useState("")
-    const { data } = useGetApi()
+    const { data } = useFetchFruits()
 
     const toggleSweetOnly = () => setSweetOnly((prev) => !prev)
 

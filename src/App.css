@@ -10,7 +10,7 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #40cac4);
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
@@ -43,7 +43,7 @@
 .status-container {
     border-radius: 8px;
     padding: 8px;
-    margin: 1.5rem 0;
+    margin: auto;
     border: 1px solid;
     font-weight: 500;
     align-items: center;
@@ -52,15 +52,21 @@
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
-    width: 240px;
+    width: 280px;
 }
 
 /* Success: Soft Green Theme */
 .success-container {
-    background-color: #00e477;
     /* color: #065f46; */
-    border-color: #86dbb4;
-    
+    border-color: #40cac4;
+    background-color: #ecfdfd;
+    color: #40cac4;
+}
+
+.success-container button {
+    background-color: #40cac4;
+    border: none;
+    color: white;
 }
 
 /* Error: Soft Red Theme */
@@ -70,8 +76,33 @@
     border-color: #fecaca;     /* Soft red border */
 }
 
+.error-container button {
+  background-color: #991b1b;
+  color: white;
+  border: none;
+}
+
+.warning-container {
+    background-color: #fffbeb; /* Very pale red */
+    color: #d97706;            /* Dark brick red text */
+    border-color: #d97706;     /* Soft red border */
+}
+
+.error-container button {
+  background-color: #d97706;
+  color: white;
+  border: none;
+}
+
 /* Simple entrance animation */
 @keyframes slideIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
 }

@@ -1,94 +1,41 @@
-import { createContext, useReducer, type ReactNode } from 'react';
-import { useLocalStorage } from '../hooks/useLocalStorage.js';
-import type { User } from '../types/User.js';
-import type { Action } from '../types/Action.js';
+// context/UserContext.tsx
+import { createContext, useReducer, useEffect, type ReactNode } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { userReducer } from "../reducers/userReducer";
+import type { User } from "../types/User.js";
 
-interface UserProviderProps {
-  children: ReactNode;
-}
-
-interface State {
+interface UserState {
   user: User | null;
   loading: boolean;
   error: string | null;
 }
 
-interface UserContextType {
-  user: User | null;
-  loading: boolean;
-  error: string | null;
+interface UserContextType extends UserState {
   dispatch: React.Dispatch<any>;
-  login: (username: string, password: string) => Promise<void>;
-  logout: () => void;
 }
 
-const defaultCartContext: UserContextType = {
-  user: null,
-  loading: false,
-  error: null,
-  dispatch: () => {},
-  login: async () => {},
-  logout: () => {},
-};
+const UserContext = createContext<UserContextType | undefined>(undefined);
 
-const UserContext = createContext(defaultCartContext);
+function UserProvider({ children }: { children: ReactNode }) {
+  const [storedUser, setStoredUser, removeStoredUser] = useLocalStorage("user", null);
 
-function UserProvider({ children }: UserProviderProps) {
-  const [storedUser, setStoredUser, removeStoredUser] = useLocalStorage(
-    'user',
-    null
-  );
+  const [state, dispatch] = useReducer(userReducer, {
+    user: storedUser, // Initialize from LocalStorage
+    loading: false,
+    error: null,
+  });
 
-  const userReducer = (state: State, action: Action) => {
-    switch (action.type) {
-      case "loginStart":
-        return { ...state, loading: true, error: null };
-      case 'loginSuccess':
-        return { user: action.payload, loading: false, error: null };
-      case 'loginError':
-        return { ...state, loading: false, error: action.payload };
-      case 'logout':
-        return { user: null, loading: false, error: null };
-      default:
-        return state;
+  // 🔄 Sync LocalStorage whenever the state.user changes
+  useEffect(() => {
+    if (state.user) {
+      setStoredUser(state.user);
+    } else {
+      removeStoredUser();
     }
-  };
-
-  const [state, dispatch] = useReducer(userReducer, { user: storedUser, loading: false, error: null });
-
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-  const login = async (username: string, password: string) => {
-    dispatch({ type: "loginStart" });
-    try {
-      const res = await fetch(`${BASE_URL}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        setStoredUser({...data, username: username});
-        dispatch({ type: 'loginSuccess', payload: data });
-      } else {
-        dispatch({ type: 'loginError', payload: data.error });
-      }
-    } catch (error: any) {
-      dispatch({ type: 'loginError', payload: error.message });
-    }
-  };
-
-  const logout = () => {
-    removeStoredUser();
-    dispatch({ type: 'logout' });
-  };
+  }, [state.user, setStoredUser, removeStoredUser]);
 
   return (
-    <UserContext.Provider value={{ ...state, dispatch, login, logout }}>
+    <UserContext.Provider value={{ ...state, dispatch }}>
       {children}
     </UserContext.Provider>
   );

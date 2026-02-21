@@ -22,7 +22,7 @@ export default function Cart() {
 
   if (isSuccess) {
     return (
-      <div className="flex justify-center status-container success-container">
+      <div className="status-container success-container">
         <h2>Thank you for your order!</h2>
         <div>
           <button onClick={() => reset()}>Close</button>
@@ -33,20 +33,20 @@ export default function Cart() {
 
   return (
     <div>
-      <h2>Cart Page</h2>
+      <div className="title">Cart Page</div>
 
     {!!state?.items.length && state.items.length > 0 && (
       <ul className="flex fruit-list mt-8 flex flex-col gap-4 mb-8">
         {state.items.map((item) => (
           <li className="flex space-between w-full" key={item.id}>
-            <div className="details flex align-center gap-4 font-bold text-lg">
+            <div className="details flex items-center gap-4 font-bold text-lg">
               <span>{fruits.find((f) => f.id === item.fruitId)?.emoji}</span>
               <span>
                 {fruits.find((f) => f.id === item.fruitId)?.name} ×{" "}
                 {item.quantity}
               </span>
             </div>
-            <div className="flex align-center gap-4">
+            <div className="flex items-center gap-4">
               <FaPlus size={24} onClick={() =>
                   dispatch({
                     type: "INCREMENT",
@@ -74,7 +74,7 @@ export default function Cart() {
       </ul>
       )}
 
-      <div>
+      <div className="status-container warning-container">
         {state?.items.length === 0 ? (
           <p>Cart is empty</p>
         ) : (

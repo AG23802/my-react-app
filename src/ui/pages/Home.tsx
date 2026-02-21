@@ -11,7 +11,7 @@ export default function Home() {
 
   if (!user) {
     return (
-      <div className="guest-home">
+      <div className="status-container warning-container">
         <h2>Welcome to the Fruit Store!</h2>
         <p>Please log in to access more features.</p>
         <Login />
@@ -20,7 +20,7 @@ export default function Home() {
   }
 
   return (
-    <div className="member-home">
+    <div className="status-container warning-container">
       <h1>Hello, {user.username}!</h1>
       <p>Check out our latest arrivals.</p>
       {/* Rest of your logged-in Home content */}

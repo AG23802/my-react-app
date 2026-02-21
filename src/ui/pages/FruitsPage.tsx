@@ -4,7 +4,7 @@ import { SearchBar } from "../components/SearchBar/SearchBar"
 export default function FruitsPage() {
   return (
     <>
-    <h2 className="mb-8">Fruits Page</h2>
+    <div className="title">Fruits Page</div>
       <SearchBar />
       <Fruits />
     </>
