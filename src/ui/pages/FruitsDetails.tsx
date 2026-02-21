@@ -16,7 +16,7 @@ export default function FruitDetails() {
     <>
     <div>Fruit Details Page for ID: {id}</div>
 
-    <span>{fruit.details}</span>
+    <div className="border border-solid border-gray-300 rounded-md p-2 m m-4">{fruit.details}</div>
 
 
     <button onClick={() => dispatch({ type: 'INCREMENT', payload: { fruitId: fruit.id } })}>

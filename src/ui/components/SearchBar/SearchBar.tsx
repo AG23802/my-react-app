@@ -1,5 +1,6 @@
 import { useContext, useRef } from "react";
 import { FruitContext } from "../../../context/FruitContext";
+import "./SearchBar.css"
 
 export function SearchBar() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -7,14 +8,14 @@ export function SearchBar() {
   const { toggleSweetOnly } = useContext(FruitContext)!;
 
   return (
-    <div className="card">
+    <div className="search-container">
       <input
         ref={inputRef}
         onChange={(e) => setQuery(e.target.value)}
         type="text"
         placeholder="Search..."
       />
-      <button onClick={() => toggleSweetOnly()}>Toggle sweet only</button>
+      <button onClick={() => toggleSweetOnly()}>Sweet only</button>
     </div>
   );
 }

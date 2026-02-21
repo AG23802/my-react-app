@@ -1,0 +1,58 @@
+.full-page-overlay {
+    position: fixed;
+    top: 64px;
+    width: 100%;
+    height: calc(100vh - 64px);
+    background-color: white;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    /* Slide up animation for a premium feel */
+}
+
+.overlay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-logo-style {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #333;
+}
+
+.close-trigger {
+    background: #f4f4f4;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+}
+
+.overlay-nav-links {
+    flex: 1; /* Takes up remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers links vertically */
+    align-items: center;    /* Centers links horizontally */
+    gap: 2.5rem;
+}
+
+.overlay-nav-links a {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: #222;
+    transition: transform 0.2s ease;
+}
+
+.overlay-nav-links a:hover {
+    color: #646cff;
+    transform: scale(1.1);
+}

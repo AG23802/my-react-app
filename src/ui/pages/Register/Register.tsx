@@ -3,6 +3,8 @@ import { registerSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod/src/index.js";
 import useRegister from "../../../hooks/useRegister";
 import { ImSpinner } from "react-icons/im";
+import { Link } from "react-router-dom";
+import "./Register.css";
 
 type FormData = {
   firstName: string;
@@ -45,7 +47,7 @@ export function Register() {
         </div>
       )}
 
-      <form className="m-4" onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex flex-col gap-4 m-4" onSubmit={handleSubmit(onSubmit)}>
         <h1>Register</h1>
 
         {errors.root && <div className="error">{errors.root.message}</div>}
@@ -90,10 +92,14 @@ export function Register() {
             <div className="error">{errors.confirmPassword.message}</div>
           )}
         </div>
-        <button disabled={isSubmitting}>
+        <button className="mt-8" disabled={isSubmitting}>
           {isSubmitting ? "Loading..." : "Register"}
         </button>
       </form>
+
+      <Link to="/login" className="m-4 text-blue-500 hover:underline">
+        Already have an account? Login here.
+      </Link>
     </>
   );
 }

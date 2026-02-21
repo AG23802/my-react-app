@@ -1,5 +1,8 @@
 .fruit-list {
-    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    height: 50vh;
+    padding: 16px;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;

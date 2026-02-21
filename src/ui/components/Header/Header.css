@@ -1,0 +1,13 @@
+header {
+    color: #40cac4;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    background-color: #eeeded;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+header h1 {
+    color: #40cac4;
+}

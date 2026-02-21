@@ -1,49 +1,46 @@
 import "./App.css";
 import { FruitProvider } from "./context/FruitContext";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./ui/pages/Home";
 import FruitsPage from "./ui/pages/FruitsPage";
 import FruitDetails from "./ui/pages/FruitsDetails";
 import Cart from "./ui/pages/Cart/Cart";
-import { Sidebar } from "./ui/components/Sidebar/Sidebar";
-import { SidebarToggle } from "./ui/components/SidebarToggle";
+import { Overlay } from "./ui/components/Overlay/Overlay";
 import { Register } from "./ui/pages/Register/Register";
 import { UserContext, UserProvider } from "./context/UserContext";
 import { useContext } from "react";
-import Login from "./ui/components/Login";
+import Login from "./ui/components/Login/Login";
 import ProtectedRoute from "./ui/components/ProtectedRoute";
+import Header from "./ui/components/Header/Header";
 
 function App() {
   function MainApp() {
     const { user } = useContext(UserContext);
 
-    return user ? (
+    return (
       <>
-      <div>
-        <div>
-          <SidebarToggle />
-          <Sidebar />
-        </div>
+        <Header />
+        {user && <Overlay />}
 
         <div className="p-5">
-        <Routes>
-          <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/fruits" element={<FruitsPage />} />
-            <Route path="/fruits/:id" element={<FruitDetails />} />
-            <Route path="/cart" element={<Cart />} />
+          <Routes>
+            {/* 1. PUBLIC ROUTES */}
             <Route path="/register" element={<Register />} />
-          </Route>
-        </Routes>
-        </div>
-      </div>
-      </>
-    ) : (
-      <>
-        <div className="flex flex-col p-4">
-          <h2>Fruits App</h2>
-        <Login />
-        <Register />
+            <Route
+              path="/login"
+              element={!user ? <Login /> : <Navigate to="/" />}
+            />
+
+            {/* 2. THE DYNAMIC HOME PATH */}
+            <Route path="/" element={<Home />} />
+
+            {/* 3. PROTECTED ROUTES */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/fruits" element={<FruitsPage />} />
+              <Route path="/fruits/:id" element={<FruitDetails />} />
+              <Route path="/cart" element={<Cart />} />
+            </Route>
+          </Routes>
         </div>
       </>
     );

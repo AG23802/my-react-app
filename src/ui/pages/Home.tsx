@@ -2,21 +2,29 @@
 // import viteLogo from '/vite.svg'
 import Logout from '../components/Logout'
 
-export default function Home() {
-  
-  return <>
-    <h2>Fruits App</h2>
-    {/* <div>
-      <a href="https://vite.dev" target="_blank">
-        <img src={viteLogo} className="logo" alt="Vite logo" />
-      </a>
-      <a href="https://react.dev" target="_blank">
-        <img src={reactLogo} className="logo react" alt="React logo" />
-      </a>
-    </div> */}
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+import Login from "../components/Login/Login";
 
-    <div className="card">
+export default function Home() {
+  const { user } = useContext(UserContext);
+
+  if (!user) {
+    return (
+      <div className="guest-home">
+        <h2>Welcome to the Fruit Store!</h2>
+        <p>Please log in to access more features.</p>
+        <Login />
+      </div>
+    );
+  }
+
+  return (
+    <div className="member-home">
+      <h1>Hello, {user.username}!</h1>
+      <p>Check out our latest arrivals.</p>
+      {/* Rest of your logged-in Home content */}
       <Logout />
     </div>
-    </>
+  );
 }
