@@ -22,8 +22,8 @@ export default function Cart() {
 
   if (isSuccess) {
     return (
-      <div className="status-container success-container">
-        <h2>Thank you for your order! 🍎</h2>
+      <div className="flex justify-center status-container success-container">
+        <h2>Thank you for your order!</h2>
         <div>
           <button onClick={() => reset()}>Close</button>
         </div>
@@ -35,18 +35,19 @@ export default function Cart() {
     <div>
       <h2>Cart Page</h2>
 
+    {!!state?.items.length && state.items.length > 0 && (
       <ul className="flex fruit-list mt-8 flex flex-col gap-4 mb-8">
-        {state?.items.map((item) => (
-          <li className="flex space-between w-100" key={item.id}>
-            <div className="details">
+        {state.items.map((item) => (
+          <li className="flex space-between w-full" key={item.id}>
+            <div className="details flex align-center gap-4 font-bold text-lg">
               <span>{fruits.find((f) => f.id === item.fruitId)?.emoji}</span>
               <span>
                 {fruits.find((f) => f.id === item.fruitId)?.name} ×{" "}
                 {item.quantity}
               </span>
             </div>
-            <div className="flex align-center gap-2">
-              <FaPlus onClick={() =>
+            <div className="flex align-center gap-4">
+              <FaPlus size={24} onClick={() =>
                   dispatch({
                     type: "INCREMENT",
                     payload: { fruitId: item.fruitId },
@@ -54,14 +55,14 @@ export default function Cart() {
                 } />
 
 
-              <FaMinus onClick={() =>
+              <FaMinus size={24} onClick={() =>
                   dispatch({
                     type: "DECREMENT",
                     payload: { id: item.id },
                   })
                 } />
 
-              <IoTrashBin onClick={() =>
+              <IoTrashBin size={24} onClick={() =>
                   dispatch({
                     type: "REMOVE",
                     payload: { id: item.id },
@@ -71,6 +72,7 @@ export default function Cart() {
           </li>
         ))}
       </ul>
+      )}
 
       <div>
         {state?.items.length === 0 ? (

@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { FruitContext } from "../../context/FruitContext"
 import { useContext } from "react"
+import { FaCartPlus } from "react-icons/fa";
 
 export default function FruitDetails() {
     const {dispatch, fruits}  = useContext(FruitContext)!
@@ -18,12 +19,7 @@ export default function FruitDetails() {
 
     <div className="border border-solid border-gray-300 rounded-md p-2 m m-4">{fruit.details}</div>
 
-
-    <button onClick={() => dispatch({ type: 'INCREMENT', payload: { fruitId: fruit.id } })}>
-        Add to Cart
-    </button>
-
-    
+    <FaCartPlus size={24} onClick={() => dispatch({ type: 'INCREMENT', payload: { fruitId: fruit.id } })} />
 </>
   )
 }

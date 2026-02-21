@@ -1,7 +1,7 @@
 .fruit-list {
     border: 1px solid #ccc;
     border-radius: 8px;
-    height: 50vh;
+    max-height: 50vh;
     padding: 16px;
     overflow-y: scroll;
     display: flex;

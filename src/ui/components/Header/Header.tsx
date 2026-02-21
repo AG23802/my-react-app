@@ -11,7 +11,7 @@ export default function Header() {
       <Link to="/">
         <h1 className="text-2xl font-bold">Fruits App</h1>
       </Link>
-      <GiHamburgerMenu className="cursor-pointer" onClick={toggleOverlay} />
+      <GiHamburgerMenu size={32} className="cursor-pointer" onClick={toggleOverlay} />
     </header>
   );
 }
