@@ -12,11 +12,11 @@ import Login from "./ui/components/Login/Login";
 import ProtectedRoute from "./ui/components/ProtectedRoute";
 import Header from "./ui/components/Header/Header";
 import Checkout from "./ui/pages/Checkout";
-import useUser from "./hooks/useUser";
+import useAuth from "./hooks/useAuth";
 
 function App() {
   function MainApp() {
-    const { user } = useUser()
+    const { user } = useAuth()
 
     return (
       <>

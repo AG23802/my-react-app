@@ -1,12 +1,12 @@
 import { Navigate, Outlet } from "react-router-dom";
-import useUser from "../../hooks/useUser";
+import useAuth from "../../hooks/useAuth";
 
 interface ProtectedRouteProps {
   children?: React.ReactNode;
 }
 
 export default function ProtectedRoute({ }: ProtectedRouteProps) {
-  const { user } = useUser();
+  const { user } = useAuth();
 
   if (!user) {
     console.log("User is not logged in, redirecting to login page.");

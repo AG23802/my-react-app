@@ -2,7 +2,7 @@ import { useState, type FormEvent } from "react";
 import { ImSpinner } from "react-icons/im";
 import "./Login.css";
 import { Link } from "react-router-dom";
-import useUser from "../../../hooks/useUser";
+import useAuth from "../../../hooks/useAuth";
 
 // admin
 // 123456
@@ -10,7 +10,7 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { login, loading, logout, error } = useUser();
+  const { login, loading, logout, error } = useAuth();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

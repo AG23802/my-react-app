@@ -1,7 +1,7 @@
-import useUser from "../../hooks/useUser";
+import useAuth from "../../hooks/useAuth";
 
 export default function Logout() {
-  const { logout } = useUser();
+  const { logout } = useAuth();
 
   return (
     <div>

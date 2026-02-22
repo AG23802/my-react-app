@@ -2,10 +2,10 @@
 // import viteLogo from '/vite.svg'
 import Logout from '../components/Logout'
 import Login from "../components/Login/Login";
-import useUser from '../../hooks/useUser';
+import useAuth from '../../hooks/useAuth';
 
 export default function Home() {
-  const { user } = useUser();
+  const { user } = useAuth();
 
   if (!user) {
     return (

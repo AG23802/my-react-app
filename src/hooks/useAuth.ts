@@ -1,10 +1,17 @@
 import { useMutation } from "@tanstack/react-query";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import type { User } from "../store/types/user";
 
-export default function useUser() {
+interface LoginResponse {
+  user: User;
+  accessToken: string;
+  resfreshToken: string;
+}
+
+export default function useAuth() {
   const context = useContext(UserContext);
-  if (!context) throw new Error("useUser must be used within UserProvider");
+  if (!context) throw new Error("useAuth must be used within UserProvider");
 
   const { dispatch, user, loading, error } = context;
 
@@ -30,8 +37,8 @@ export default function useUser() {
     },
 
     // 2. When fetch succeeds
-    onSuccess: (data) => {
-      dispatch({ type: "loginSuccess", payload: data });
+    onSuccess: (loginResponse: LoginResponse) => {
+      dispatch({ type: "loginSuccess", payload: loginResponse.user });
     },
 
     // 3. When fetch fails
