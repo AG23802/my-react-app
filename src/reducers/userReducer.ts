@@ -21,6 +21,8 @@ export function userReducer(state: State, action: Action) {
       return { ...state, loading: false, error: action.payload };
     case "logout":
       return { user: null, loading: false, error: null };
+    case "STOP_LOADING":
+      return { ...state, loading: false };
     default:
       return state;
   }

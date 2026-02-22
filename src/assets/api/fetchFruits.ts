@@ -9,3 +9,4 @@ export async function fetchFruits() {
   const data = await res.json();
   return data; // make sure your API returns an array of fruits
 }
+

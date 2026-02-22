@@ -2,15 +2,20 @@ import { useMutation } from "@tanstack/react-query";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import type { User } from "../store/types/user";
+import { useLocalStorage } from "./useLocalStorage";
+import type { Auth } from "../auth/interfaces/Auth";
 
 interface LoginResponse {
   user: User;
-  accessToken: string;
-  resfreshToken: string;
+  auth: Auth;
 }
 
 export default function useAuth() {
   const context = useContext(UserContext);
+    const [storedAuth, setStoredAuth, removeStoredAuth] = useLocalStorage<Auth | null>(
+      "auth",
+      null,
+    );
   if (!context) throw new Error("useAuth must be used within UserProvider");
 
   const { dispatch, user, loading, error } = context;
@@ -38,6 +43,11 @@ export default function useAuth() {
 
     // 2. When fetch succeeds
     onSuccess: (loginResponse: LoginResponse) => {
+      // ✅ Save TOKENS to storage (Persistence)
+      setStoredAuth(loginResponse?.auth);
+
+      // ✅ Dispatch USER to Context (UI State)
+      // This makes 'user' available to the rest of your app immediately
       dispatch({ type: "loginSuccess", payload: loginResponse.user });
     },
 
@@ -50,8 +60,11 @@ export default function useAuth() {
   return {
     user,
     loading, // Now synced with Global Context
-    error,   // Now synced with Global Context
+    error, // Now synced with Global Context
     login: loginMutation.mutate,
-    logout: () => dispatch({ type: "logout" }),
+    logout: () => {
+      removeStoredAuth();
+      dispatch({ type: "logout" });
+    },
   };
 }

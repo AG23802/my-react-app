@@ -1,8 +1,15 @@
 // context/UserContext.tsx
-import { createContext, useReducer, useEffect, type ReactNode, type Dispatch } from "react";
+import {
+  createContext,
+  useReducer,
+  useEffect,
+  type ReactNode,
+  type Dispatch,
+} from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { userReducer } from "../reducers/userReducer";
 import type { User } from "../types/User.js";
+import { initializeUser } from "../auth/initializeUser.ts";
 
 interface UserState {
   user: User | null;
@@ -17,51 +24,21 @@ interface UserContextType extends UserState {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 function UserProvider({ children }: { children: ReactNode }) {
-  const [storedUser, setStoredUser, removeStoredUser] = useLocalStorage("user", null);
+  const [storedAuth, , removeStoredAuth] = useLocalStorage(
+    "auth",
+    null,
+  );
 
   const [state, dispatch] = useReducer(userReducer, {
-    user: storedUser, // Initialize from LocalStorage
-    loading: false,
+    user: null, // Initialize from LocalStorage
+    loading: true,
     error: null,
   });
 
-  // 🔄 Sync LocalStorage whenever the state.user changes
   useEffect(() => {
-    if (state.user) {
-      setStoredUser(state.user);
-    } else {
-      removeStoredUser();
-    }
-  }, [state.user, setStoredUser, removeStoredUser]);
-
-
-  // inside UserProvider.tsx
-useEffect(() => {
-  const initializeUser = async () => {
-    const token = localStorage.getItem("accessToken");
-    if (!token) return;
-
-    try {
-      // Call your new /me endpoint
-      const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-      const response = await fetch(`${BASE_URL}/auth/me`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      
-      if (response.ok) {
-        const userData = await response.json();
-        dispatch({ type: "loginSuccess", payload: userData });
-      } else {
-        // Token might be expired
-        removeStoredUser();
-      }
-    } catch (err) {
-      console.error("Failed to re-authenticate", err);
-    }
-  };
-
-  initializeUser();
-}, []);
+    console.log("UserProvider mounted, initializing user...");
+    initializeUser(dispatch, storedAuth, removeStoredAuth);
+  }, []);
 
   return (
     <UserContext.Provider value={{ ...state, dispatch }}>

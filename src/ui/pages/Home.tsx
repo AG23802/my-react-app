@@ -3,9 +3,14 @@
 import Logout from '../components/Logout'
 import Login from "../components/Login/Login";
 import useAuth from '../../hooks/useAuth';
+import { ImSpinner } from 'react-icons/im';
 
 export default function Home() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return <ImSpinner className="animate-spin text-teal-400 w-6 h-6" />;
+  }
 
   if (!user) {
     return (
