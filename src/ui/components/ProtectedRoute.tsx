@@ -1,13 +1,12 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "../../context/UserContext";
+import useUser from "../../hooks/useUser";
 
 interface ProtectedRouteProps {
   children?: React.ReactNode;
 }
 
 export default function ProtectedRoute({ }: ProtectedRouteProps) {
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
 
   if (!user) {
     console.log("User is not logged in, redirecting to login page.");

@@ -1,35 +1,13 @@
 import { useContext } from "react";
 import { FruitContext } from "../../../context/FruitContext";
-import useCheckout from "../../../hooks/useCheckout";
 import "./Cart.css";
 import { IoTrashBin } from "react-icons/io5";
 import { FaPlus, FaMinus } from "react-icons/fa";
-
+import { Link } from "react-router";
 
 export default function Cart() {
   const { state, dispatch } = useContext(FruitContext)!;
   const { fruits } = useContext(FruitContext)!;
-  const { mutate, isPending, isSuccess, isError, reset } = useCheckout();
-
-  if (isError) {
-    return (
-      <div className="status-container error-container">
-        <h2>Checkout failed. Please try again.</h2>
-        <button onClick={() => reset()}>Close</button>
-      </div>
-    );
-  }
-
-  if (isSuccess) {
-    return (
-      <div className="status-container success-container">
-        <h2>Thank you for your order!</h2>
-        <div>
-          <button onClick={() => reset()}>Close</button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div>
@@ -78,9 +56,9 @@ export default function Cart() {
         {state?.items.length === 0 ? (
           <p>Cart is empty</p>
         ) : (
-          <button disabled={isPending} onClick={() => mutate(state)}>
+          <Link to="/checkout">
             CHECKOUT
-          </button>
+          </Link>
         )}
       </div>
     </div>

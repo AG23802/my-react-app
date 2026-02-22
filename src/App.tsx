@@ -7,20 +7,21 @@ import FruitDetails from "./ui/pages/FruitsDetails";
 import Cart from "./ui/pages/Cart/Cart";
 import { Overlay } from "./ui/components/Overlay/Overlay";
 import { Register } from "./ui/pages/Register/Register";
-import { UserContext, UserProvider } from "./context/UserContext";
-import { useContext } from "react";
+import { UserProvider } from "./context/UserContext";
 import Login from "./ui/components/Login/Login";
 import ProtectedRoute from "./ui/components/ProtectedRoute";
 import Header from "./ui/components/Header/Header";
+import Checkout from "./ui/pages/Checkout";
+import useUser from "./hooks/useUser";
 
 function App() {
   function MainApp() {
-    const { user } = useContext(UserContext);
+    const { user } = useUser()
 
     return (
       <>
         <Header />
-        {user && <Overlay />}
+        <Overlay />
 
         <div className="p-5">
           <Routes>
@@ -34,11 +35,13 @@ function App() {
             {/* 2. THE DYNAMIC HOME PATH */}
             <Route path="/" element={<Home />} />
 
-            {/* 3. PROTECTED ROUTES */}
-            <Route element={<ProtectedRoute />}>
-              <Route path="/fruits" element={<FruitsPage />} />
+            <Route path="/fruits" element={<FruitsPage />} />
               <Route path="/fruits/:id" element={<FruitDetails />} />
               <Route path="/cart" element={<Cart />} />
+
+            {/* 3. PROTECTED ROUTES */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/checkout" element={<Checkout />} />
             </Route>
           </Routes>
         </div>

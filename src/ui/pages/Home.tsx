@@ -1,13 +1,11 @@
 // import reactLogo from './../../assets/react.svg'
 // import viteLogo from '/vite.svg'
 import Logout from '../components/Logout'
-
-import { useContext } from "react";
-import { UserContext } from "../../context/UserContext";
 import Login from "../components/Login/Login";
+import useUser from '../../hooks/useUser';
 
 export default function Home() {
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
 
   if (!user) {
     return (

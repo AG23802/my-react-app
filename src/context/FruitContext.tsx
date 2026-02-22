@@ -1,6 +1,5 @@
 import {
   createContext,
-  useContext,
   useEffect,
   useMemo,
   type Dispatch,
@@ -10,7 +9,7 @@ import { initialCartState } from "../reducers/cartReducer";
 import useCart from "../hooks/useCart";
 import useSearchFilters from "../hooks/useSearchFilters";
 import type { Fruit } from "../types/fruit";
-import { UserContext } from "./UserContext";
+import useUser from "../hooks/useUser";
 
 interface FruitContextType {
   fruits: Fruit[];
@@ -30,7 +29,7 @@ export function FruitProvider({ children }: { children?: ReactNode }) {
     useSearchFilters();
   const toggleSweetOnly = () => setSweetOnly((prev) => !prev);
   const { state, dispatch } = useCart();
-  const { user } = useContext(UserContext)!;
+  const { user } = useUser();
 
   useEffect(() => {
     if (!user) {
