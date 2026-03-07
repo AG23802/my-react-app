@@ -43,7 +43,9 @@ jobs:
           containerAppName: ca-fruits-frontend-prod-chn-new
           resourceGroup: rg-fruits-prod-chn
           imageToBuild: default/[parameters('containerAppName')]:${{ github.sha }}
+          targetPort: 80
           _buildArgumentsKey_: |
             _buildArgumentsValues_
+
 
 
