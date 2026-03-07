@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
+      - dev
 
 jobs:
   build_and_deploy_job:
@@ -44,3 +46,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_SAND_0EEB3DB03 }}
           action: "close"
+
