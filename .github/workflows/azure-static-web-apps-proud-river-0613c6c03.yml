@@ -13,7 +13,7 @@ jobs:
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
-    environment: Development # <--- ADD THIS LINE HERE
+    environment: Production # <--- ADD THIS LINE HERE
     name: Build and Deploy Job
     steps:
       - uses: actions/checkout@v3
@@ -48,6 +48,7 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROUD_RIVER_0613C6C03 }}
           action: "close"
+
 
 
 
