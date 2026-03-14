@@ -72,12 +72,12 @@
 /* Error: Soft Red Theme */
 .error-container {
     background-color: #fef2f2; /* Very pale red */
-    color: #991b1b;            /* Dark brick red text */
+    color: #ff3838;            /* Dark brick red text */
     border-color: #fecaca;     /* Soft red border */
 }
 
 .error-container button {
-  background-color: #991b1b;
+  background-color: #ff3838;
   color: white;
   border: none;
 }
@@ -88,7 +88,7 @@
     border-color: #d97706;     /* Soft red border */
 }
 
-.error-container button {
+.warning-container button {
   background-color: #d97706;
   color: white;
   border: none;
