@@ -4,7 +4,7 @@ import { useContext } from "react";
 
 export default function useCheckout() {
   const queryClient = useQueryClient();
-  const { state, dispatch } = useContext(FruitContext)!;
+  const { dispatch } = useContext(FruitContext)!;
 
   return useMutation({
     // 1. The actual function that talks to the server
@@ -15,14 +15,22 @@ export default function useCheckout() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newCart),
       });
+
+      // --- ADD THIS CHECK ---
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(
+          errorData.message || `Server error: ${response.status}`,
+        );
+      }
+
       return response.json();
     },
     // 2. What to do when the server says "OK"
     onSuccess: () => {
       console.log("Data saved!");
       dispatch({
-        type: "CHECKOUT",
-        payload: state,
+        type: "CHECKOUT"
       });
       // This tells React Query to re-fetch the fruits/cart list in case stock levels changed after checkout,
       // so the UI stays in sync with the server

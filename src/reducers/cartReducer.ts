@@ -12,7 +12,7 @@ export type CartAction =
   | { type: "INCREMENT"; payload: CartItem }
   | { type: "DECREMENT"; payload: { id: string } }
   | { type: "REMOVE"; payload: { id: string } }
-  | { type: "CHECKOUT"; payload: CartState }
+  | { type: "CHECKOUT" }
   | { type: "CLEAR_CART" };
 
 export const initialCartState: CartState = {
