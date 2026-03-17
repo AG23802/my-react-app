@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <div className="status-container warning-container">
-      <h1>Hello, {user.username}!</h1>
+      <h1>Hello, {user.firstName}!</h1>
       <p>Check out our latest arrivals.</p>
       {/* Rest of your logged-in Home content */}
       <Logout />

@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import type { User } from "../store/types/user";
+import type { User } from "../types/User";
 import { useLocalStorage } from "./useLocalStorage";
 import type { Auth } from "../auth/interfaces/Auth";
 
