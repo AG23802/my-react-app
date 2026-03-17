@@ -25,7 +25,7 @@ export default function Fruits() {
                     <span> (Stock: {fruit.stock})</span>
                   </Link>
 
-                  <FaCartPlus
+                  <FaCartPlus className="cursor-pointer"
                     size={24}
                     onClick={() =>
                       dispatch({

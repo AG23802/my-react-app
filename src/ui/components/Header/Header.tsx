@@ -12,7 +12,7 @@ export default function Header() {
     <header className="p-4">
       <Link className="relative" to="/">
         <h1 className="text-2xl font-bold">Fruits App</h1>
-        <span className="badge">{env}</span>
+        {env === "DEV" && <span className="badge">{env}</span>}
       </Link>
 
       <div className="flex items-center gap-4">

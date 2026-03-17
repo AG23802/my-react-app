@@ -25,7 +25,7 @@ export default function Cart() {
               </span>
             </div>
             <div className="flex items-center gap-4">
-              <FaPlus size={24} onClick={() =>
+              <FaPlus className="cursor-pointer" size={24} onClick={() =>
                   dispatch({
                     type: "INCREMENT",
                     payload: { fruitId: item.fruitId },
@@ -33,14 +33,14 @@ export default function Cart() {
                 } />
 
 
-              <FaMinus size={24} onClick={() =>
+              <FaMinus className="cursor-pointer" size={24} onClick={() =>
                   dispatch({
                     type: "DECREMENT",
                     payload: { id: item.id },
                   })
                 } />
 
-              <IoTrashBin size={24} onClick={() =>
+              <IoTrashBin className="cursor-pointer" size={24} onClick={() =>
                   dispatch({
                     type: "REMOVE",
                     payload: { id: item.id },
