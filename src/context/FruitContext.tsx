@@ -33,7 +33,7 @@ export function FruitProvider({ children }: { children?: ReactNode }) {
 
   useEffect(() => {
     if (!user) {
-      dispatch({ type: "CLEAR_CART" });
+      // dispatch({ type: "CLEAR_CART" });
     }
   }, [user]);
 
