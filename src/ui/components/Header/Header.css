@@ -14,10 +14,12 @@ header h1 {
 
 .badge {
     position: absolute;
-    top: -10px;
-    right: -26px;
-    background: red;
-    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    top: 0px;
+    right: -16px;
+    background: #ff00009e;
+    color: #213547;
     padding: 2px 4px;
     border-radius: 12px;
 }
